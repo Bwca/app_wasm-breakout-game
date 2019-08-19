@@ -1,0 +1,46 @@
+:root {
+  --body-bg-color: #111;
+  --canvas-color: #333;
+  --button-text-color: #eee;
+  --button-background-color: var(--body-bg-color);
+  --button-border-color: var(--canvas-color);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--body-bg-color);
+}
+
+#canvas {
+  background: var(--canvas-color);
+  display: block;
+  margin: 0 auto;
+}
+
+button {
+  display: block;
+  margin: 10px auto 0 auto;
+  text-transform: uppercase;
+  color: var(--button-text-color);
+  background-color: var(--button-background-color);
+  border-color: var(--button-border-color);
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+/*# sourceMappingURL=/style.ff1c4cab.css.map */

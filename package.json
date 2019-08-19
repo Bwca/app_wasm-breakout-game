@@ -1,0 +1,35 @@
+{
+  "name": "wasm-breakout-game",
+  "version": "1.0.0",
+  "description": "A breakout game built using Web Assembly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "asbuild:untouched": "asc src/assembly/index.ts -b dist/wasm/untouched.wasm -t dist/wasm/untouched.wat --sourceMap --validate --debug",
+    "asbuild:optimized": "asc src/assembly/index.ts -b dist/wasm/optimized.wasm -t dist/wasm/optimized.wat --sourceMap --validate --optimize",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bwca/wasm-breakout-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bwca/wasm-breakout-game/issues"
+  },
+  "homepage": "https://github.com/Bwca/wasm-breakout-game#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "prettier": "^1.18.2",
+    "sass": "^1.22.10",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@types/node": "^12.7.2",
+    "assemblyscript": "github:assemblyscript/assemblyscript",
+    "axios": "^0.19.0",
+    "node-fetch": "^2.6.0"
+  }
+}
