@@ -17,6 +17,9 @@ const imports: any = {
         }
     },
     canvas: {
+        clearRect(x: number, y: number, width: number, height: number) {
+            canvas.clearRect(x, y, width, height);
+        },
         drawCircle(
             x: number,
             y: number,
@@ -49,5 +52,11 @@ fetch(WASM_MODULE_URL)
     .then(bytes => instantiateBuffer(bytes as Uint8Array, imports))
     .then(bytes => {
         wasmModuleInstance = <unknown>bytes as ImportedWasmModule;
-        wasmModuleInstance.sayHello();
+        const y = new wasmModuleInstance.BreakoutGame(canvas.canvasWidth, canvas.canvasHeight);
+        
+                /* setInterval(() => {
+                    y.gameLoop();
+                }, 400)
+            
+                console.log(y) */
     });

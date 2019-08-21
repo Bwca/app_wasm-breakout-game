@@ -597,6 +597,9 @@ var imports = {
     }
   },
   canvas: {
+    clearRect: function clearRect(x, y, width, height) {
+      canvas.clearRect(x, y, width, height);
+    },
     drawCircle: function drawCircle(x, y, radius, red, green, blue) {
       var rgb = "rgb(".concat(red, ", ").concat(green, ", ").concat(blue, ")");
       canvas.drawCircle(x, y, radius, rgb);
@@ -613,7 +616,11 @@ fetch(_wasmUrl.default).then(function (response) {
   return (0, _loader.instantiateBuffer)(bytes, imports);
 }).then(function (bytes) {
   wasmModuleInstance = bytes;
-  wasmModuleInstance.sayHello();
+  var y = new wasmModuleInstance.BreakoutGame(canvas.canvasWidth, canvas.canvasHeight);
+  /* setInterval(() => {
+      y.gameLoop();
+  }, 400)
+   console.log(y) */
 });
 },{"assemblyscript/lib/loader":"../node_modules/assemblyscript/lib/loader/index.js","./constants/wasm-url.constant":"constants/wasm-url.constant.ts","./models/canvas.model":"models/canvas.model.ts"}],"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -643,7 +650,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37291" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39953" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

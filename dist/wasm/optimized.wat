@@ -1,38 +1,46 @@
 (module
  (type $FUNCSIG$iii (func (param i32 i32) (result i32)))
  (type $FUNCSIG$v (func))
+ (type $FUNCSIG$iiii (func (param i32 i32 i32) (result i32)))
  (type $FUNCSIG$viiii (func (param i32 i32 i32 i32)))
  (type $FUNCSIG$vii (func (param i32 i32)))
  (type $FUNCSIG$ii (func (param i32) (result i32)))
  (type $FUNCSIG$viii (func (param i32 i32 i32)))
  (type $FUNCSIG$vi (func (param i32)))
  (type $FUNCSIG$viiiiii (func (param i32 i32 i32 i32 i32 i32)))
- (type $FUNCSIG$viiiiiii (func (param i32 i32 i32 i32 i32 i32 i32)))
+ (type $FUNCSIG$iiiiiiii (func (param i32 i32 i32 i32 i32 i32 i32) (result i32)))
  (type $FUNCSIG$i (func (result i32)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
+ (import "canvas" "clearRect" (func $src/assembly/index/clear_rect (param i32 i32 i32 i32)))
  (import "canvas" "drawCircle" (func $src/assembly/index/draw_circle (param i32 i32 i32 i32 i32 i32)))
- (import "canvas" "drawRect" (func $src/assembly/index/draw_rect (param i32 i32 i32 i32 i32 i32 i32)))
  (memory $0 1)
  (data (i32.const 8) "\1e\00\00\00\01\00\00\00\01\00\00\00\1e\00\00\00~\00l\00i\00b\00/\00r\00t\00/\00t\00l\00s\00f\00.\00t\00s")
  (data (i32.const 56) "(\00\00\00\01\00\00\00\01\00\00\00(\00\00\00a\00l\00l\00o\00c\00a\00t\00i\00o\00n\00 \00t\00o\00o\00 \00l\00a\00r\00g\00e")
  (data (i32.const 112) "\1e\00\00\00\01\00\00\00\01\00\00\00\1e\00\00\00~\00l\00i\00b\00/\00r\00t\00/\00p\00u\00r\00e\00.\00t\00s")
  (data (i32.const 160) "$\00\00\00\01\00\00\00\01\00\00\00$\00\00\00I\00n\00d\00e\00x\00 \00o\00u\00t\00 \00o\00f\00 \00r\00a\00n\00g\00e")
  (data (i32.const 216) "\14\00\00\00\01\00\00\00\01\00\00\00\14\00\00\00~\00l\00i\00b\00/\00r\00t\00.\00t\00s")
- (data (i32.const 256) "\07\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\03")
+ (data (i32.const 256) "\t\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\03\00\00\00\10\00\00\00\00\00\00\00\10")
  (global $~lib/rt/tlsf/ROOT (mut i32) (i32.const 0))
  (global $~lib/rt/pure/CUR (mut i32) (i32.const 0))
  (global $~lib/rt/pure/END (mut i32) (i32.const 0))
  (global $~lib/rt/pure/ROOTS (mut i32) (i32.const 0))
  (global $src/assembly/index/circle (mut i32) (i32.const 0))
  (global $~lib/rt/__rtti_base i32 (i32.const 256))
+ (global $src/assembly/index/BreakoutGame i32 (i32.const 7))
  (export "memory" (memory $0))
  (export "__alloc" (func $~lib/rt/tlsf/__alloc))
  (export "__retain" (func $~lib/rt/pure/__retain))
  (export "__release" (func $~lib/rt/pure/__release))
  (export "__collect" (func $~lib/rt/pure/__collect))
  (export "__rtti_base" (global $~lib/rt/__rtti_base))
+ (export "BreakoutGame" (global $src/assembly/index/BreakoutGame))
+ (export "BreakoutGame#get:ball" (func $BreakoutGame#get:ball))
+ (export "BreakoutGame#set:ball" (func $BreakoutGame#set:ball))
+ (export "BreakoutGame#get:canvas" (func $BreakoutGame#get:canvas))
+ (export "BreakoutGame#set:canvas" (func $BreakoutGame#set:canvas))
+ (export "BreakoutGame#constructor" (func $src/assembly/index/BreakoutGame#constructor))
+ (export "BreakoutGame#gameLoop" (func $src/assembly/index/BreakoutGame#gameLoop))
  (export "add" (func $src/assembly/index/add))
- (export "sayHello" (func $src/assembly/index/sayHello))
  (start $start)
  (func $~lib/rt/tlsf/removeBlock (; 3 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
@@ -619,10 +627,10 @@
   if
    unreachable
   end
-  i32.const 320
+  i32.const 336
   i32.const 0
   i32.store
-  i32.const 1888
+  i32.const 1904
   i32.const 0
   i32.store
   i32.const 0
@@ -636,7 +644,7 @@
     local.get $0
     i32.const 2
     i32.shl
-    i32.const 320
+    i32.const 336
     i32.add
     i32.const 0
     i32.store offset=4
@@ -655,7 +663,7 @@
       i32.add
       i32.const 2
       i32.shl
-      i32.const 320
+      i32.const 336
       i32.add
       i32.const 0
       i32.store offset=96
@@ -673,13 +681,13 @@
     br $loop|0
    end
   end
-  i32.const 320
-  i32.const 1904
+  i32.const 336
+  i32.const 1920
   memory.size
   i32.const 16
   i32.shl
   call $~lib/rt/tlsf/addMemory
-  i32.const 320
+  i32.const 336
   global.set $~lib/rt/tlsf/ROOT
  )
  (func $~lib/rt/tlsf/prepareSize (; 7 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
@@ -1092,7 +1100,7 @@
  )
  (func $~lib/rt/pure/__retain (; 14 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   local.get $0
-  i32.const 316
+  i32.const 332
   i32.gt_u
   if
    local.get $0
@@ -1504,7 +1512,7 @@
  )
  (func $~lib/rt/pure/__release (; 22 ;) (type $FUNCSIG$vi) (param $0 i32)
   local.get $0
-  i32.const 316
+  i32.const 332
   i32.gt_u
   if
    local.get $0
@@ -1779,13 +1787,12 @@
   i32.store offset=4
   local.get $0
  )
- (func $src/assembly/models/shapes/circle.model/Circle#constructor (; 29 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  local.get $0
+ (func $src/assembly/models/shapes/circle.model/Circle#constructor (; 29 ;) (type $FUNCSIG$iiiiiiii) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i32) (param $6 i32) (result i32)
+  (local $7 i32)
+  local.get $3
   call $~lib/rt/pure/__retain
   drop
-  local.get $1
+  local.get $6
   call $~lib/rt/pure/__retain
   drop
   i32.const 28
@@ -1793,85 +1800,85 @@
   call $~lib/rt/tlsf/__alloc
   call $~lib/rt/pure/__retain
   call $src/assembly/models/shapes/canvas-item.model/CanvasItem#constructor
-  local.tee $2
+  local.tee $7
   i32.const 0
   i32.store offset=24
+  local.get $7
   local.get $2
-  i32.const 20
   i32.store offset=24
-  local.get $2
-  i32.const 50
+  local.get $7
+  local.get $0
   i32.store
-  local.get $2
-  i32.const 50
+  local.get $7
+  local.get $1
   i32.store offset=4
-  local.get $2
+  local.get $7
   i32.load offset=8
-  local.tee $3
-  local.get $0
+  local.tee $0
+  local.get $3
   i32.ne
   if
+   local.get $3
+   call $~lib/rt/pure/__retain
+   drop
    local.get $0
-   call $~lib/rt/pure/__retain
-   drop
-   local.get $3
    call $~lib/rt/pure/__release
   end
-  local.get $2
-  local.get $0
+  local.get $7
+  local.get $3
   i32.store offset=8
-  local.get $2
-  i32.const 0
+  local.get $7
+  local.get $4
   i32.store offset=12
-  local.get $2
-  i32.const 0
+  local.get $7
+  local.get $5
   i32.store offset=16
-  local.get $2
+  local.get $7
   i32.load offset=20
-  local.tee $3
-  local.get $1
+  local.tee $0
+  local.get $6
   i32.ne
   if
-   local.get $1
+   local.get $6
    call $~lib/rt/pure/__retain
    drop
-   local.get $3
+   local.get $0
    call $~lib/rt/pure/__release
   end
-  local.get $2
-  local.get $1
+  local.get $7
+  local.get $6
   i32.store offset=20
-  local.get $0
+  local.get $3
   call $~lib/rt/pure/__release
-  local.get $1
+  local.get $6
   call $~lib/rt/pure/__release
-  local.get $2
+  local.get $7
  )
- (func $src/assembly/models/rgb-color.model/RGB#constructor (; 30 ;) (type $FUNCSIG$i) (result i32)
-  (local $0 i32)
+ (func $src/assembly/models/rgb-color.model/RGB#constructor (; 30 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
   i32.const 12
   i32.const 4
   call $~lib/rt/tlsf/__alloc
   call $~lib/rt/pure/__retain
-  local.tee $0
+  local.tee $2
   i32.const 0
   i32.store
-  local.get $0
+  local.get $2
   i32.const 0
   i32.store offset=4
-  local.get $0
+  local.get $2
   i32.const 0
   i32.store offset=8
-  local.get $0
+  local.get $2
   i32.const 0
   i32.store
-  local.get $0
-  i32.const 200
+  local.get $2
+  local.get $1
   i32.store offset=8
+  local.get $2
   local.get $0
-  i32.const 130
   i32.store offset=4
-  local.get $0
+  local.get $2
  )
  (func $src/assembly/models/canvas-item-direction-modifier.model/CanvasItemDirectionModifier#constructor (; 31 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
@@ -1893,42 +1900,18 @@
   i32.store offset=4
   local.get $0
  )
- (func $src/assembly/index/add (; 32 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
-  local.get $0
-  local.get $1
-  i32.add
- )
- (func $src/assembly/index/sayHello (; 33 ;) (type $FUNCSIG$v)
-  global.get $src/assembly/index/circle
-  i32.load
-  global.get $src/assembly/index/circle
-  i32.load offset=4
-  global.get $src/assembly/index/circle
-  i32.load offset=24
-  global.get $src/assembly/index/circle
-  i32.load offset=8
-  i32.load
-  global.get $src/assembly/index/circle
-  i32.load offset=8
-  i32.load offset=4
-  global.get $src/assembly/index/circle
-  i32.load offset=8
-  i32.load offset=8
-  call $src/assembly/index/draw_circle
-  i32.const 200
-  i32.const 200
-  i32.const 150
-  i32.const 10
-  i32.const 255
-  i32.const 0
-  i32.const 255
-  call $src/assembly/index/draw_rect
- )
- (func $start (; 34 ;) (type $FUNCSIG$v)
+ (func $start:src/assembly/index (; 32 ;) (type $FUNCSIG$v)
   (local $0 i32)
   (local $1 i32)
+  i32.const 50
+  i32.const 50
+  i32.const 20
+  i32.const 130
+  i32.const 200
   call $src/assembly/models/rgb-color.model/RGB#constructor
   local.tee $0
+  i32.const 0
+  i32.const 0
   call $src/assembly/models/canvas-item-direction-modifier.model/CanvasItemDirectionModifier#constructor
   local.tee $1
   call $src/assembly/models/shapes/circle.model/Circle#constructor
@@ -1938,9 +1921,149 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $~lib/rt/pure/__visit (; 35 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $src/assembly/models/canvas.model/CanvasDimensions#constructor (; 33 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  i32.const 8
+  i32.const 8
+  call $~lib/rt/tlsf/__alloc
+  call $~lib/rt/pure/__retain
+  local.tee $2
+  i32.const 0
+  i32.store
+  local.get $2
+  i32.const 0
+  i32.store offset=4
+  local.get $2
   local.get $0
-  i32.const 316
+  i32.store
+  local.get $2
+  local.get $1
+  i32.store offset=4
+  local.get $2
+ )
+ (func $src/assembly/index/BreakoutGame#constructor (; 34 ;) (type $FUNCSIG$iiii) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+  (local $3 i32)
+  local.get $0
+  i32.eqz
+  if
+   i32.const 8
+   i32.const 7
+   call $~lib/rt/tlsf/__alloc
+   call $~lib/rt/pure/__retain
+   local.set $0
+  end
+  local.get $0
+  i32.const 0
+  i32.store
+  local.get $0
+  i32.const 0
+  i32.store offset=4
+  local.get $1
+  local.get $2
+  call $src/assembly/models/canvas.model/CanvasDimensions#constructor
+  local.set $1
+  local.get $0
+  i32.load offset=4
+  call $~lib/rt/pure/__release
+  local.get $0
+  local.get $1
+  i32.store offset=4
+  i32.const 200
+  i32.const 200
+  i32.const 30
+  i32.const 255
+  i32.const 0
+  call $src/assembly/models/rgb-color.model/RGB#constructor
+  local.tee $1
+  i32.const 15
+  i32.const 15
+  call $src/assembly/models/canvas-item-direction-modifier.model/CanvasItemDirectionModifier#constructor
+  local.tee $2
+  call $src/assembly/models/shapes/circle.model/Circle#constructor
+  local.set $3
+  local.get $0
+  i32.load
+  call $~lib/rt/pure/__release
+  local.get $0
+  local.get $3
+  i32.store
+  local.get $1
+  call $~lib/rt/pure/__release
+  local.get $2
+  call $~lib/rt/pure/__release
+  local.get $0
+ )
+ (func $src/assembly/models/shapes/canvas-item.model/CanvasItem#accelerateItem (; 35 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  local.get $0
+  i32.load
+  local.get $0
+  i32.load offset=12
+  local.get $0
+  i32.load offset=20
+  i32.load
+  i32.mul
+  i32.add
+  i32.store
+  local.get $0
+  local.get $0
+  i32.load offset=4
+  local.get $0
+  i32.load offset=16
+  local.get $0
+  i32.load offset=20
+  i32.load offset=4
+  i32.mul
+  i32.add
+  i32.store offset=4
+ )
+ (func $src/assembly/index/BreakoutGame#gameLoop (; 36 ;) (type $FUNCSIG$vi) (param $0 i32)
+  local.get $0
+  i32.load
+  call $src/assembly/models/shapes/canvas-item.model/CanvasItem#accelerateItem
+  i32.const 0
+  i32.const 0
+  local.get $0
+  i32.load offset=4
+  i32.load
+  local.get $0
+  i32.load offset=4
+  i32.load offset=4
+  call $src/assembly/index/clear_rect
+  local.get $0
+  i32.load
+  i32.load
+  local.get $0
+  i32.load
+  i32.load offset=4
+  local.get $0
+  i32.load
+  i32.load offset=24
+  local.get $0
+  i32.load
+  i32.load offset=8
+  i32.load
+  local.get $0
+  i32.load
+  i32.load offset=8
+  i32.load offset=4
+  local.get $0
+  i32.load
+  i32.load offset=8
+  i32.load offset=8
+  call $src/assembly/index/draw_circle
+ )
+ (func $src/assembly/index/add (; 37 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+  local.get $0
+  local.get $1
+  i32.add
+ )
+ (func $start (; 38 ;) (type $FUNCSIG$v)
+  call $start:src/assembly/index
+ )
+ (func $~lib/rt/pure/__visit (; 39 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  local.get $0
+  i32.const 332
   i32.lt_u
   if
    return
@@ -2048,22 +2171,41 @@
    unreachable
   end
  )
- (func $~lib/rt/__visit_members (; 36 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/__visit_members (; 40 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   block $switch$1$default
-   block $switch$1$case$5
-    block $switch$1$case$4
-     block $switch$1$case$2
+   block $switch$1$case$9
+    block $switch$1$case$5
+     block $switch$1$case$4
+      block $switch$1$case$2
+       local.get $0
+       i32.const 8
+       i32.sub
+       i32.load
+       br_table $switch$1$case$2 $switch$1$case$2 $switch$1$case$4 $switch$1$case$5 $switch$1$case$2 $switch$1$case$2 $switch$1$case$5 $switch$1$case$9 $switch$1$case$2 $switch$1$default
+      end
+      return
+     end
+     local.get $0
+     i32.load
+     local.tee $0
+     if
       local.get $0
-      i32.const 8
-      i32.sub
-      i32.load
-      br_table $switch$1$case$2 $switch$1$case$2 $switch$1$case$4 $switch$1$case$5 $switch$1$case$2 $switch$1$case$2 $switch$1$case$5 $switch$1$default
+      local.get $1
+      call $~lib/rt/pure/__visit
      end
      return
     end
     local.get $0
-    i32.load
+    i32.load offset=8
+    local.tee $2
+    if
+     local.get $2
+     local.get $1
+     call $~lib/rt/pure/__visit
+    end
+    local.get $0
+    i32.load offset=20
     local.tee $0
     if
      local.get $0
@@ -2073,7 +2215,7 @@
     return
    end
    local.get $0
-   i32.load offset=8
+   i32.load
    local.tee $2
    if
     local.get $2
@@ -2081,7 +2223,7 @@
     call $~lib/rt/pure/__visit
    end
    local.get $0
-   i32.load offset=20
+   i32.load offset=4
    local.tee $0
    if
     local.get $0
@@ -2092,7 +2234,53 @@
   end
   unreachable
  )
- (func $null (; 37 ;) (type $FUNCSIG$v)
+ (func $null (; 41 ;) (type $FUNCSIG$v)
   nop
+ )
+ (func $BreakoutGame#get:ball (; 42 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  i32.load
+  call $~lib/rt/pure/__retain
+ )
+ (func $BreakoutGame#set:ball (; 43 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  local.get $1
+  i32.load
+  local.tee $2
+  local.get $1
+  i32.ne
+  if
+   local.get $1
+   call $~lib/rt/pure/__retain
+   drop
+   local.get $2
+   call $~lib/rt/pure/__release
+  end
+  local.get $0
+  local.get $1
+  i32.store
+ )
+ (func $BreakoutGame#get:canvas (; 44 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+  local.get $0
+  i32.load offset=4
+  call $~lib/rt/pure/__retain
+ )
+ (func $BreakoutGame#set:canvas (; 45 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  local.get $0
+  i32.load offset=4
+  local.tee $2
+  local.get $1
+  i32.ne
+  if
+   local.get $1
+   call $~lib/rt/pure/__retain
+   drop
+   local.get $2
+   call $~lib/rt/pure/__release
+  end
+  local.get $0
+  local.get $1
+  i32.store offset=4
  )
 )
