@@ -574,6 +574,25 @@ function () {
 }();
 
 exports.default = Canvas;
+},{}],"wasm-shared/enums/game-statuses.enum.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/** possible statuses of the game */
+var BreakOutGameStatuses;
+
+(function (BreakOutGameStatuses) {
+  BreakOutGameStatuses[BreakOutGameStatuses["NewGame"] = 0] = "NewGame";
+  BreakOutGameStatuses[BreakOutGameStatuses["NotStarted"] = 1] = "NotStarted";
+  BreakOutGameStatuses[BreakOutGameStatuses["GameOver"] = 2] = "GameOver";
+})(BreakOutGameStatuses || (BreakOutGameStatuses = {}));
+
+var _default = BreakOutGameStatuses;
+exports.default = _default;
 },{}],"index.ts":[function(require,module,exports) {
 "use strict";
 
@@ -583,9 +602,12 @@ var _wasmUrl = _interopRequireDefault(require("./constants/wasm-url.constant"));
 
 var _canvas = _interopRequireDefault(require("./models/canvas.model"));
 
+var _gameStatuses = _interopRequireDefault(require("./wasm-shared/enums/game-statuses.enum"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var wasmModuleInstance;
+var wasmBreakout;
 var canvasId = 'canvas';
 var canvas = new _canvas.default(canvasId);
 var imports = {
@@ -594,6 +616,15 @@ var imports = {
       var message = wasmModuleInstance.__getString(msg);
 
       console.log(message);
+    }
+  },
+  game: {
+    canContinueCheck: function canContinueCheck(status) {
+      if (status !== _gameStatuses.default.GameOver) {
+        requestAnimationFrame(function () {
+          return wasmBreakout.gameLoop();
+        });
+      }
     }
   },
   canvas: {
@@ -610,19 +641,32 @@ var imports = {
     }
   }
 };
+
+function startGame() {
+  console.log('start game');
+}
+
+function pauseGame() {
+  console.log('pause game');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('dom content loaded');
+  document.getElementById('start-game').addEventListener('click', startGame);
+  document.getElementById('pause-game').addEventListener('click', pauseGame);
+});
 fetch(_wasmUrl.default).then(function (response) {
   return response.arrayBuffer();
 }).then(function (bytes) {
   return (0, _loader.instantiateBuffer)(bytes, imports);
 }).then(function (bytes) {
   wasmModuleInstance = bytes;
-  var y = new wasmModuleInstance.BreakoutGame(canvas.canvasWidth, canvas.canvasHeight);
-  /* setInterval(() => {
-      y.gameLoop();
-  }, 400)
-   console.log(y) */
+  wasmBreakout = new wasmModuleInstance.BreakoutGame(canvas.canvasWidth, canvas.canvasHeight);
+  requestAnimationFrame(function () {
+    return wasmBreakout.gameLoop();
+  });
 });
-},{"assemblyscript/lib/loader":"../node_modules/assemblyscript/lib/loader/index.js","./constants/wasm-url.constant":"constants/wasm-url.constant.ts","./models/canvas.model":"models/canvas.model.ts"}],"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"assemblyscript/lib/loader":"../node_modules/assemblyscript/lib/loader/index.js","./constants/wasm-url.constant":"constants/wasm-url.constant.ts","./models/canvas.model":"models/canvas.model.ts","./wasm-shared/enums/game-statuses.enum":"wasm-shared/enums/game-statuses.enum.ts"}],"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -650,7 +694,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39953" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40293" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
