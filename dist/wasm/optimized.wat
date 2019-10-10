@@ -35,6 +35,7 @@
  (export "BreakoutGame" (global $src/assembly/index/BreakoutGame))
  (export "BreakoutGame#constructor" (func $src/assembly/index/BreakoutGame#constructor))
  (export "BreakoutGame#gameLoop" (func $src/assembly/index/BreakoutGame#gameLoop))
+ (export "BreakoutGame#set:newGameStatus" (func $src/assembly/index/BreakoutGame#set:newGameStatus))
  (export "createGame" (func $src/assembly/index/createGame))
  (func $~lib/rt/tlsf/removeBlock (; 4 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
@@ -2089,13 +2090,18 @@
   i32.load offset=8
   call $src/assembly/index/check_if_can_continue
  )
- (func $src/assembly/index/createGame (; 38 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $src/assembly/index/BreakoutGame#set:newGameStatus (; 38 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=8
+ )
+ (func $src/assembly/index/createGame (; 39 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   i32.const 0
   local.get $0
   local.get $1
   call $src/assembly/index/BreakoutGame#constructor
  )
- (func $~lib/rt/pure/__visit (; 39 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/pure/__visit (; 40 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $0
   i32.const 332
   i32.lt_u
@@ -2205,7 +2211,7 @@
    unreachable
   end
  )
- (func $~lib/rt/__visit_members (; 40 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/__visit_members (; 41 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   block $switch$1$default
    block $switch$1$case$6
@@ -2268,7 +2274,7 @@
   end
   unreachable
  )
- (func $null (; 41 ;) (type $FUNCSIG$v)
+ (func $null (; 42 ;) (type $FUNCSIG$v)
   nop
  )
 )

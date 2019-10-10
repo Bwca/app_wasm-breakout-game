@@ -32,6 +32,10 @@ export class BreakoutGame {
     check_if_can_continue(this.gameStatus);
   }
 
+  public set newGameStatus(status: BreakOutGameStatuses) {
+    this.gameStatus = status;
+  }
+
   private collide(): void {
     if (this.ball.x < 0 || this.ball.x > this.canvas.width) {
       this.ball.directionModifier.x = -this.ball.directionModifier.x;

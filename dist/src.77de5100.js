@@ -643,11 +643,14 @@ var imports = {
 };
 
 function startGame() {
-  console.log('start game');
+  wasmBreakout.newGameStatus = _gameStatuses.default.NewGame;
+  requestAnimationFrame(function () {
+    return wasmBreakout.gameLoop();
+  });
 }
 
 function pauseGame() {
-  console.log('pause game');
+  wasmBreakout.newGameStatus = _gameStatuses.default.GameOver;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -694,7 +697,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40293" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46615" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

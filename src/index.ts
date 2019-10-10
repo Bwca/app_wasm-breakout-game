@@ -8,7 +8,6 @@ import BreakOutGameStatuses from './wasm-shared/enums/game-statuses.enum';
 let wasmModuleInstance: ImportedWasmModule;
 let wasmBreakout: BreakoutGame;
 const canvasId = 'canvas';
-
 const canvas = new Canvas(canvasId);
 
 const imports: any = {
@@ -57,11 +56,13 @@ const imports: any = {
 };
 
 function startGame(): void {
-    console.log('start game');
+    wasmBreakout.newGameStatus = BreakOutGameStatuses.NewGame;
+    requestAnimationFrame(() => wasmBreakout.gameLoop());
 }
 
 function pauseGame(): void {
-    console.log('pause game')
+    wasmBreakout.newGameStatus = BreakOutGameStatuses.GameOver;
+    
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -77,6 +78,7 @@ fetch(WASM_MODULE_URL)
     .then(bytes => instantiateBuffer(bytes as Uint8Array, imports))
     .then(bytes => {
         wasmModuleInstance = <unknown>bytes as ImportedWasmModule;
+
         wasmBreakout = new wasmModuleInstance.BreakoutGame(canvas.canvasWidth, canvas.canvasHeight);
         requestAnimationFrame(() => wasmBreakout.gameLoop());
 
