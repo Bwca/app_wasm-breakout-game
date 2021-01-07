@@ -30,6 +30,6 @@
     "@types/node": "^12.7.2",
     "assemblyscript": "github:assemblyscript/assemblyscript",
     "axios": "^0.21.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   }
 }
